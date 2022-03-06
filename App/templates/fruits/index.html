@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Origin</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for fruit in fruits %}
+            <tr>
+                <td>
+                    <img src="{{ fruit.img.url }}">
+                </td>
+                <td>{{ fruit.name }}</td>
+                <td>{{ fruit.origin }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        {% load static %}
+
+    <div class="paginator">
+
+        {% if fruits.has_previous %}
+
+            <a class="pagination-action" href="?page=1">
+                <i class="fas fa-angle-double-left"></i>
+            </a>
+            <a class="pagination-action" href="?page={{ fruits.previous_page_number }}">
+                <i class="fas fa-angle-left"></i>
+            </a>
+
+        {% endif %}
+
+        {% for num in fruits.paginator.page_range %}
+
+            {% if fruits.number == num %}
+                <span class="paginator-number paginator-current">{{ num }}</span>
+            {% elif num > fruits.number|add:'-3' and num < fruits.number|add:'3' %}
+                <a class="paginator-number" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+
+        {% endfor %}
+
+        {% if fruits.has_next %}
+
+            <a class="pagination-action" href="?page={{ fruits.next_page_number }}">
+                <i class="fas fa-angle-double-right"></i>
+            </a>
+            <a class="pagination-action" href="?page={{ fruits.paginator.num_pages }}">
+                <i class="fas fa-angle-right"></i>
+            </a>
+
+        {% endif %}
+    </div>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pagination.css' %}">
+
+{% endblock %}

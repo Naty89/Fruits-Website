@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <h1>Search Results</h1>
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Origin</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for result in results %}
+                <tr>
+                    <td>
+                        <img src="{{ result.img.url }}">
+                    </td>
+                    <td>{{ result.name }}</td>
+                    <td>{{ result.origin }}</td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+        {% load static %}
+
+        <div class="paginator">
+
+            {% if results.has_previous %}
+
+                <a class="pagination-action" href="?page=1">
+                    <i class="fas fa-angle-double-left"></i>
+                </a>
+                <a class="pagination-action" href="?page={{ results.previous_page_number }}">
+                    <i class="fas fa-angle-left"></i>
+                </a>
+
+            {% endif %}
+
+            {% for num in results.paginator.page_range %}
+
+                {% if results.number == num %}
+                    <span class="paginator-number paginator-current">{{ num }}</span>
+                {% elif num > results.number|add:'-3' and num < results.number|add:'3' %}
+                    <a class="paginator-number" href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+
+            {% endfor %}
+
+            {% if results.has_next %}
+
+                <a class="pagination-action" href="?page={{ results.next_page_number }}">
+                    <i class="fas fa-angle-double-right"></i>
+                </a>
+                <a class="pagination-action" href="?page={{ results.paginator.num_pages }}">
+                    <i class="fas fa-angle-right"></i>
+                </a>
+
+            {% endif %}
+        </div>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/pagination.css' %}">
+    </head>
+    <body>
+
+    </body>
+    </html>
+{% endblock %}

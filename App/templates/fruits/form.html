@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary">Upload Fruit</button>
+        </form>
+        <hr>
+        {% if img_obj %}
+            <h3>Succesfully uploaded : {{ img_obj.name }}</h3>
+            <img src="{{ img_obj.img.url }}" alt="connect" style="width:100px">
+        {% endif %}
+    </head>
+    <body>
+
+    </body>
+    </html>
+{% endblock %}
