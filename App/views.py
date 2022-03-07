@@ -60,7 +60,7 @@ def insert(request):
 
 def search(request):
     template = 'fruits/search_results.html'
-    query = request.GET.get('q')
+    query = request.GET.get('fruit')
 
     if query:
         results = Fruit.objects.filter(Q(name__icontains=query) |

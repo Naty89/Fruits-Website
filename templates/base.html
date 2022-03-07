@@ -28,7 +28,7 @@
                     <a class="nav-link" href="{% url 'insert_data' %}">Upload Fruit</a>
                 </li>
                 <form id="search" action="{% url 'search_results' %}" class="d-flex" method="get">
-                    <input class="form-control me-2" type="search" name="q" value="{{ request.GET.q }}"
+                    <input class="form-control me-2" type="search" name="fruit" value="{{ request.GET.fruit }}"
                            placeholder="Search" aria-label="Fruit">
                     <button class="btn btn-outline-secondary" type="submit">Search</button>
                 </form>
