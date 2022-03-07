@@ -74,7 +74,7 @@ def index(request):
     # os.system('python Fruit/media/images.py')
     fruits = Fruit.objects.all()
 
-    paginator = Paginator(fruits, 5)
+    paginator = Paginator(fruits, 5u
     page = request.GET.get('page')
 
     fruits = paginator.get_page(page)
@@ -83,5 +83,9 @@ def index(request):
 ```
 
 I then used css to prettify the page (code can be seen in templates/css/pagination.css)
+
+## Deploying on Heroku
+
+To install heroku, I used snapd (https://snapcraft.io/install/heroku/ubuntu) because I am on linux mint
 
 This was a very fun project and I was able to learn a lot of things throughout the process
